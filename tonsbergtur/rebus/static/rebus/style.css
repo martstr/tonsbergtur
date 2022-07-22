@@ -1,0 +1,110 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    height: 100%;
+}
+
+#holder {
+    min-height: 100%;
+    position: relative;
+}
+
+#topmatter {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0em;
+    clear: both;
+    border: none;
+}
+
+#topmatter h1 {
+    display: inline-block;
+    margin: 0;
+    padding: 0.3em;
+    padding-bottom: 0;
+    font-size: medium;
+}
+
+#topmatter h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+#topmatter nav, #topmatter nav menu {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+#topmatter nav menu li {
+    display: inline-block;
+}
+
+#topmatter nav menu li.menuitem a {
+    text-decoration: none;
+    padding: .2em;
+    color: white;
+    border: 1px solid white;
+    border-bottom: none;
+}
+
+#topmatter nav menu li.active a {
+    background-color: white;
+    color: black;
+}
+
+#topmatter nav menu li.menuitem a:hover {
+    background-color: white;
+    color: black;
+}
+
+#topmatter nav menu li.login a {
+    border: none;
+    color: white;
+    text-decoration: none;
+}
+
+#topmatter nav menu li.login a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/*#mainmatter {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1.5em;
+}*/
+
+#mainmatter h2 {
+    font-size: xx-large;
+}
+
+#mainmatter h3 {
+    display: block;
+    background-color: blue;
+    color: white;
+    padding: .5em;
+}
+
+#mainmatter h3 a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-decoration: none;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+footer .easteregg {
+    color: black;
+}

@@ -1,0 +1,119 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>tonsbergtur</Name>
+    <RootNamespace>tonsbergtur</RootNamespace>
+    <InterpreterId>Global|VisualStudio|env (Python 3.10 (64-bit))</InterpreterId>
+    <WebBrowserPort>8080</WebBrowserPort>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>dc9058c8-d3e6-481d-b12b-de3ed681ea5f</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>tonsbergtur.settings</DjangoSettingsModule>
+    <WebBrowserUrl>https://127.0.0.1</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <PythonRunWebServerCommandArguments>runsslserver --settings $(DjangoSettingsModule) %SERVER_PORT% $(CommandLineArguments)</PythonRunWebServerCommandArguments>
+    <PythonDebugWebServerCommandArguments>runsslserver --noreload --settings $(DjangoSettingsModule) %SERVER_PORT% $(CommandLineArguments)</PythonDebugWebServerCommandArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="manage.py" />
+    <Compile Include="rebus\admin.py" />
+    <Compile Include="rebus\apps.py" />
+    <Compile Include="rebus\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rebus\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rebus\migrations\__init__.py" />
+    <Compile Include="rebus\models.py" />
+    <Compile Include="rebus\tests.py" />
+    <Compile Include="rebus\views.py" />
+    <Compile Include="rebus\__init__.py" />
+    <Compile Include="tonsbergtur\asgi.py" />
+    <Compile Include="tonsbergtur\__init__.py" />
+    <Compile Include="tonsbergtur\settings.py" />
+    <Compile Include="tonsbergtur\urls.py" />
+    <Compile Include="tonsbergtur\wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rebus\static\rebus\style.css" />
+    <Content Include="rebus\templates\rebus\location_detail.html" />
+    <Content Include="rebus\templates\rebus\location_list.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="templates\403.html" />
+    <Content Include="templates\404.html" />
+    <Content Include="templates\base_generic.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="rebus\static\" />
+    <Folder Include="rebus\static\rebus\" />
+    <Folder Include="templates\" />
+    <Folder Include="rebus\" />
+    <Folder Include="rebus\migrations\" />
+    <Folder Include="rebus\templates\" />
+    <Folder Include="rebus\templates\rebus\" />
+    <Folder Include="tonsbergtur\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|VisualStudio|env (Python 3.10 (64-bit))" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

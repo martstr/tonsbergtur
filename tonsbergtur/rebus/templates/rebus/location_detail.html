@@ -1,0 +1,92 @@
+﻿{% extends "base_generic.html" %}
+
+{% block title %}{{ location.get_title }}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'location-list' %}">Alle oppgaver</a></p>
+
+<h2>{{ location.get_title }}</h2>
+    {{ location.description|safe }}
+
+    {% for problem in location.geoproblem_set.all %}
+    <details>
+        <summary>{{ problem.title }}</summary>
+        {{ problem.description|safe }}
+        <button class="submit find-me" onclick="geoFindMe('p{{problem.pk}}')">Vi er her</button>
+        <p id="p{{problem.pk}}"></p>
+    </details>
+    {% endfor %}
+    {% for problem in location.knowledgetextproblem_set.all %}
+    <details>
+        <summary>{{ problem.title }}</summary>
+        {{ problem.description|safe }}
+        <button class="submit">Send inn svar</button>
+    </details>
+    {% endfor %}
+    {% for problem in location.knowledgenumberproblem_set.all %}
+    <details>
+        <summary>{{ problem.title }}</summary>
+        {{ problem.description|safe }}
+        <button class="submit">Send inn svar</button>
+    </details>
+    {% endfor %}
+    {% for problem in location.openproblem_set.all %}
+    <details>
+        <summary>{{ problem.title }}</summary>
+        {{ problem.description|safe }}
+        <button class="submit">Registrer utført</button>
+    </details>
+    {% endfor %}
+
+    <a id="map-link" target="_blank"></a>
+
+    <script>
+        function geoFindMe(buttonId) {
+
+            const responseLbl = document.querySelector('#'.concat(buttonId));
+
+            function success(position) {
+                const data = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                };
+
+                fetch('https://127.0.0.1:8080/check-location/', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        if (data.status) {
+                            responseLbl.textContent = 'Riktig!';
+                        } else {
+                            responseLbl.textContent = 'Nehei, det er dere ikke.'
+                        }
+
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        responseLbl.textContent = error
+                    });
+
+            }
+
+            function error() {
+                responseLbl.textContent = 'Unable to retrieve your location';
+            }
+
+            if (!navigator.geolocation) {
+                responseLbl.textContent = 'Geolocation is not supported by your browser';
+            } else {
+                responseLbl.textContent = 'Locating…';
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+
+        }
+
+    </script>
+{% endblock %}

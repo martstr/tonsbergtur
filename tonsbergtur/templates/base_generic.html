@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="nb">
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Tur i Tønsberg{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'rebus/style.css' %}">
+</head>
+<body>
+    <div id="holder">
+        <div id="topmatter">
+            <h1><a href="{% url 'index' %}">Tur i Tønsberg</a></h1>
+            <nav id="menu">
+                <!-- Foreløpig tom -->
+            </nav>
+        </div>
+
+        <div id="mainmatter">
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer>
+            Oppgaver av Christina og Martin, programmering av Martin. God tur! <span class="easteregg">Heia Bodø/Glimt!</span>
+        </footer>
+    </div>
+</body>
+</html>
