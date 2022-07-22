@@ -55,6 +55,7 @@
     <Compile Include="tonsbergtur\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="db.sqlite3" />
     <Content Include="rebus\static\rebus\style.css" />
     <Content Include="rebus\templates\rebus\location_detail.html" />
     <Content Include="rebus\templates\rebus\location_list.html" />
