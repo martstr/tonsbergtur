@@ -6,10 +6,12 @@
 <h2>Oppgaver</h2>
 {% if location_list %}
     {% for location in location_list %}
-    <div class="location">
-        <h3><a href="{% url 'location-detail' location.pk %}">{{ location.get_title }}</a></h3>
+    <details class="location">
+        <summary>
+            <a href="{% url 'location-detail' location.pk %}">{{ location.get_title }}</a>
+        </summary>
         <p class="problemcount">{{ location.get_problem_count }} oppgaver</p>
-    </div>
+    </details>
     {% endfor %}
     {{ location_list|length }} steder å besøke
 

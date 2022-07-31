@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Location
+from .forms import GeoProblemForm, KnowledgeTextProblemForm, KnowledgeNumberProblemForm, KnowledgeOpenProblemForm
 from .serializers import CoordinateSerializer
 
 from rest_framework.views import APIView
@@ -39,3 +42,11 @@ class CheckLocationView(APIView):
             # 
 
         return Response({'status': False}, status=status.HTTP_400_BAD_REQUEST)
+
+class GeoProblemView(LoginRequiredMixin, FormView):
+    template_name='todo.html'
+    form_class = GeoProblemForm
+    success_url = 'todo/'
+   
+    def form_valid(self, form):
+        if 
