@@ -3,6 +3,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 from .views import LocationListView, LocationDetailView, CheckLocationView
 
+app_name = 'rebus'
 urlpatterns = [
     path('', views.index, name='index'),
     path('location/', LocationListView.as_view(), name='location-list'),

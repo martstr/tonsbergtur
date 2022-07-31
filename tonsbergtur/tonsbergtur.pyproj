@@ -3,9 +3,10 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>tonsbergtur</Name>
     <RootNamespace>tonsbergtur</RootNamespace>
-    <InterpreterId>Global|VisualStudio|Tønsberg-tur</InterpreterId>
+    <InterpreterId>Global|VisualStudio|env (Python 3.10 (64-bit))</InterpreterId>
     <WebBrowserPort>8080</WebBrowserPort>
     <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -62,6 +63,7 @@
     <Content Include="rebus\static\rebus\style.css" />
     <Content Include="rebus\templates\rebus\location_detail.html" />
     <Content Include="rebus\templates\rebus\location_list.html" />
+    <Content Include="rebus\templates\rebus\response.html" />
     <Content Include="requirements.txt" />
     <Content Include="templates\403.html" />
     <Content Include="templates\404.html" />
@@ -78,6 +80,7 @@
     <Folder Include="tonsbergtur\" />
   </ItemGroup>
   <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.10" />
     <InterpreterReference Include="Global|VisualStudio|env (Python 3.10 (64-bit))" />
     <InterpreterReference Include="Global|VisualStudio|Tønsberg-tur" />
   </ItemGroup>

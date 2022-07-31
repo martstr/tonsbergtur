@@ -8,7 +8,7 @@
     {% for location in location_list %}
     <details class="location">
         <summary>
-            <a href="{% url 'location-detail' location.pk %}">{{ location.get_title }}</a>
+            <a href="{% url 'rebus:location-detail' location.pk %}">{{ location.get_title }}</a>
         </summary>
         <p class="problemcount">{{ location.get_problem_count }} oppgaver</p>
     </details>

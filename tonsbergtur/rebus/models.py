@@ -43,6 +43,13 @@ class Problem(models.Model):
     def __str__(self):
         return self.title
 
+class Response(models.Model):
+    class Meta:
+        abstract = True
+
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    correct = models.BooleanField(default = False)
+
 class GeoProblem(Problem):
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -52,6 +59,11 @@ class GeoProblem(Problem):
         d = geo_distance((self.latitude, self.longitude), (submitted_latitude, submitted_longitude)).m
         return d <= self.threshold
 
+class GeoResponse(Response):
+    problem = models.ForeignKey(GeoProblem, on_delete = models.CASCADE)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
 class KnowledgeTextProblem(Problem):
     correct_answer = models.CharField(max_length = 100)
     threshold = models.IntegerField(default=0, help_text='Accepted Levenshtein distance between given and correct answer. 0 for only exact answers')
@@ -59,6 +71,10 @@ class KnowledgeTextProblem(Problem):
     def verify_answer(self, submitted_answer: str) -> bool:
         d = levenshtein_distance(self.correct_answer.lower(), submitted_answer.lower())
         return (d <= self.threshold)
+
+class KnowledgeTextResponse(Response):
+    problem = models.ForeignKey(KnowledgeTextProblem, on_delete = models.CASCADE)
+    answer = models.CharField(max_length = 100)
 
 class KnowledgeNumberProblem(Problem):
     correct_answer = models.FloatField()
@@ -71,23 +87,26 @@ class KnowledgeNumberProblem(Problem):
             ratio = self.correct_answer
         d = 100*abs(submitted_answer - self.correct_answer)/ratio
         return (d <= self.threshold)
+    
+class KnowledgeNumberResponse(Response):
+    problem = models.ForeignKey(KnowledgeNumberProblem, on_delete = models.CASCADE)
+    answer = models.CharField(max_length = 100)
 
 class OpenProblem(Problem):
 
     def verify_answer(self):
         return True
 
-class Answer(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete = models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    problem = GenericForeignKey('content_type', 'object_id')
-    correct = models.BooleanField(default = False)
+class OpenResponse(Response):
+    problem = models.ForeignKey(OpenProblem, on_delete = models.CASCADE)
 
 ## TODO
 #
+# - Innlogging og brukertilpassing
+# - Sjekk om det finnes riktige svar
+# - Vise skjema for hver iterasjon
 # - Lokasjoner med ålreit formatering
-# - Oppgaver på lokasjon
-# - GPS-innsending
-#   - Avstand mellom to punkter
+# X Oppgaver på lokasjon
+# X GPS-innsending
+#   X Avstand mellom to punkter
 # - Sette lagnavn for bruker

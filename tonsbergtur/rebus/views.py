@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Location
-from .forms import GeoProblemForm, KnowledgeTextProblemForm, KnowledgeNumberProblemForm, KnowledgeOpenProblemForm
+from .forms import ProblemForm, GeoProblemForm, KnowledgeTextProblemForm, KnowledgeNumberProblemForm, OpenProblemForm
 from .serializers import CoordinateSerializer
 
 from rest_framework.views import APIView
@@ -22,6 +22,28 @@ class LocationListView(ListView):
 
 class LocationDetailView(DetailView):
     model = Location
+
+class ResponseView(FormView):
+    template_name = 'response.html'
+    form_class = ProblemForm
+    success_url = '/todo2/'
+
+    def get_form_kwargs(self):
+        kwargs = super(ResponseView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+class GeoResponseView(ResponseView):
+    form_class = GeoProblemForm
+
+class KnowledgeTextResponseView(ResponseView):
+    form_class = KnowledgeTextProblemForm
+    
+class KnowledgeNumberResponseView(ResponseView):
+    form_class = KnowledgeNumberProblemForm
+    
+class OpenResponseView(ResponseView):
+    form_class = OpenProblemForm
 
 class CheckLocationView(APIView):
     permission_classes = ()
@@ -43,10 +65,10 @@ class CheckLocationView(APIView):
 
         return Response({'status': False}, status=status.HTTP_400_BAD_REQUEST)
 
-class GeoProblemView(LoginRequiredMixin, FormView):
-    template_name='todo.html'
-    form_class = GeoProblemForm
-    success_url = 'todo/'
+#class GeoProblemView(LoginRequiredMixin, FormView):
+#    template_name='todo.html'
+#    form_class = GeoProblemForm
+#    success_url = 'todo/'
    
-    def form_valid(self, form):
-        if 
+#    def form_valid(self, form):
+#        if 
