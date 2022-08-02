@@ -1,4 +1,5 @@
 {% load static %}
+{% load rebus_extras %}
 
 <!DOCTYPE html>
 
@@ -8,11 +9,12 @@
     <title>{% block title %}Tur i Tønsberg{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{% static 'rebus/style.css' %}">
+    <script type="text/javascript" src="{% static 'rebus/submit.js' %}"></script>
 </head>
 <body>
     <div id="holder">
         <div id="topmatter">
-            <h1><a href="{% url 'index' %}">Tur i Tønsberg</a></h1>
+            <h1><a href="{% url 'rebus:index' %}">Tur i Tønsberg</a></h1>
             <nav id="menu">
                 <!-- Foreløpig tom -->
             </nav>

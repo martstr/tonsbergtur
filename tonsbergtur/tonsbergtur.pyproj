@@ -44,6 +44,12 @@
     <Compile Include="rebus\serializers.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="rebus\templatetags\rebus_extras.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rebus\templatetags\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="rebus\urls.py">
       <SubType>Code</SubType>
     </Compile>
@@ -60,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="db.sqlite3" />
+    <Content Include="rebus\static\rebus\submit.js" />
     <Content Include="rebus\static\rebus\style.css" />
     <Content Include="rebus\templates\rebus\location_detail.html" />
     <Content Include="rebus\templates\rebus\location_list.html" />
@@ -70,6 +77,7 @@
     <Content Include="templates\base_generic.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="rebus\templatetags\" />
     <Folder Include="rebus\static\" />
     <Folder Include="rebus\static\rebus\" />
     <Folder Include="templates\" />

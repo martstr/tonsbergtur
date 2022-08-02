@@ -1,92 +1,51 @@
 ﻿{% extends "base_generic.html" %}
 
+{% load rebus_extras %}
+
 {% block title %}{{ location.get_title }}{% endblock %}
 
 {% block content %}
-<p><a href="{% url 'location-list' %}">Alle oppgaver</a></p>
+<p><a href="{% url 'rebus:location-list' %}">Alle oppgaver</a></p>
 
 <h2>{{ location.get_title }}</h2>
-    {{ location.description|safe }}
+{{ location.description|safe }}
 
     {% for problem in location.geoproblem_set.all %}
-    <details>
-        <summary>{{ problem.title }}</summary>
-        {{ problem.description|safe }}
-        <button class="submit find-me" onclick="geoFindMe('p{{problem.pk}}')">Vi er her</button>
-        <p id="p{{problem.pk}}"></p>
-    </details>
+        {% responded_correctly problem user as responded_correctly_flag %}
+<details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <summary>{{ problem.title }}</summary>
+    {{ problem.description|safe }}
+    <button class="submit find-me" onclick="geoProblemSubmit({{problem.pk}})">Vi er her</button>
+    <p id="lblgeo{{problem.pk}}"></p>
+</details>
     {% endfor %}
     {% for problem in location.knowledgetextproblem_set.all %}
-    <details>
-        <summary>{{ problem.title }}</summary>
-        {{ problem.description|safe }}
-        <button class="submit">Send inn svar</button>
-    </details>
+        {% responded_correctly problem user as responded_correctly_flag %}
+<details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <summary>{{ problem.title }}</summary>
+    {{ problem.description|safe }}
+    <input type="text" id="text{{problem.pk}}" name="text{{problem.pk}}">
+    <button class="submit textproblem" onclick="textProblemSubmit({{problem.pk}})">Send inn svar</button>
+    <p id="lbltext{{problem.pk}}"></p>
+</details>
     {% endfor %}
     {% for problem in location.knowledgenumberproblem_set.all %}
-    <details>
-        <summary>{{ problem.title }}</summary>
-        {{ problem.description|safe }}
-        <button class="submit">Send inn svar</button>
-    </details>
+        {% responded_correctly problem user as responded_correctly_flag %}
+<details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <summary>{{ problem.title }}</summary>
+    {{ problem.description|safe }}
+    <input type="number" id="number{{problem.pk}}" name="number{{problem.pk}}">
+    <button class="submit numberproblem" onclick="numberProblemSubmit({{problem.pk}})">Send inn svar</button>
+    <p id="lblnumber{{problem.pk}}"></p>
+</details>
     {% endfor %}
     {% for problem in location.openproblem_set.all %}
-    <details>
-        <summary>{{ problem.title }}</summary>
-        {{ problem.description|safe }}
-        <button class="submit">Registrer utført</button>
-    </details>
+        {% responded_correctly problem user as responded_correctly_flag %}
+<details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <summary>{{ problem.title }}</summary>
+    {{ problem.description|safe }}
+    <button class="submit openproblem" onclick="openProblemSubmit({{problem.pk}})">Registrer utført</button>
+    <p id="lblopen{{problem.pk}}"></p>
+</details>
     {% endfor %}
-
-    <a id="map-link" target="_blank"></a>
-
-    <script>
-        function geoFindMe(buttonId) {
-
-            const responseLbl = document.querySelector('#'.concat(buttonId));
-
-            function success(position) {
-                const data = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                };
-
-                fetch('https://127.0.0.1:8080/check-location/', {
-                    method: 'POST', // or 'PUT'
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data);
-                        if (data.status) {
-                            responseLbl.textContent = 'Riktig!';
-                        } else {
-                            responseLbl.textContent = 'Nehei, det er dere ikke.'
-                        }
-
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                        responseLbl.textContent = error
-                    });
-
-            }
-
-            function error() {
-                responseLbl.textContent = 'Unable to retrieve your location';
-            }
-
-            if (!navigator.geolocation) {
-                responseLbl.textContent = 'Geolocation is not supported by your browser';
-            } else {
-                responseLbl.textContent = 'Locating…';
-                navigator.geolocation.getCurrentPosition(success, error);
-            }
-
-        }
-
-    </script>
 {% endblock %}

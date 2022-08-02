@@ -1,23 +1,48 @@
 from django.contrib import admin
+from nested_admin import NestedModelAdmin, NestedTabularInline
 from .models import *
 
-class GeoProblemInline(admin.TabularInline):
+class GeoResponseInline(NestedTabularInline):
+    model = GeoResponse
+    extra = 0
+    readonly_fields = ('created_at', )
+
+class GeoProblemInline(NestedTabularInline):
     model = GeoProblem
     extra = 0
+    inlines = [GeoResponseInline]
 
-class KnowledgeTextProblemInline(admin.TabularInline):
+class KnowledgeTextResponseInline(NestedTabularInline):
+    model = KnowledgeTextResponse
+    extra = 0
+    readonly_fields = ('created_at', )
+
+class KnowledgeTextProblemInline(NestedTabularInline):
     model = KnowledgeTextProblem
     extra = 0
+    inlines = [KnowledgeTextResponseInline]
 
-class KnowledgeNumberProblemInline(admin.TabularInline):
+class KnowledgeNumberResponseInline(NestedTabularInline):
+    model = KnowledgeNumberResponse
+    extra = 0
+    readonly_fields = ('created_at', )
+
+class KnowledgeNumberProblemInline(NestedTabularInline):
     model = KnowledgeNumberProblem
     extra = 0
+    inlines = [KnowledgeNumberResponseInline]
 
-class OpenProblem(admin.TabularInline):
+class OpenResponseInline(NestedTabularInline):
+    model = OpenResponse
+    extra = 0
+    readonly_fields = ('created_at', )
+
+class OpenProblem(NestedTabularInline):
     model = OpenProblem
     extra = 0
+    inlines = [OpenResponseInline]
 
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(NestedModelAdmin):
     inlines = [
         GeoProblemInline,
         KnowledgeTextProblemInline,

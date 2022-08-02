@@ -6,3 +6,5 @@ django-sslserver
 djangorestframework
 geopy
 python-Levenshtein
+django-cors-headers
+django-nested-admin
