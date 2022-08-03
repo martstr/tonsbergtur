@@ -15,13 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
-from django.conf.urls.static import static # This line is new
-from django.conf import settings # This line is new
+from django.conf.urls.static import static
+from django.conf import settings
+
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('login/', auth_views.LoginView.as_view(
+        template_name='index.html'
+        ), 
+        name='login'
+    ),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('', include('rebus.urls')),
 ]
 

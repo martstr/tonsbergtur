@@ -75,6 +75,7 @@
     <Content Include="templates\403.html" />
     <Content Include="templates\404.html" />
     <Content Include="templates\base_generic.html" />
+    <Content Include="templates\index.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="rebus\templatetags\" />

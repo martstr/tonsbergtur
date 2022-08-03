@@ -1,10 +1,8 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Location
-from .forms import ProblemForm, GeoProblemForm, KnowledgeTextProblemForm, KnowledgeNumberProblemForm, OpenProblemForm
 from .serializers import GeoResponseSerializer, KnowledgeTextResponseSerializer, KnowledgeNumberResponseSerializer, OpenResponseSerializer
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -13,16 +11,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from geopy.distance import distance
-
 # Create your views here.
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
-class LocationListView(ListView):
+class LocationListView(LoginRequiredMixin, ListView):
     model = Location
 
-class LocationDetailView(DetailView):
+class LocationDetailView(LoginRequiredMixin, DetailView):
     model = Location
 
 class GeoProblemView(APIView):
