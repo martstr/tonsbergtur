@@ -16,10 +16,6 @@ class Location(models.Model):
     def __str__(self):
         return self.title
 
-    def get_title(self):
-        # Utvid denne til å sjekke om man kan vise hidden_title i stedet
-        return self.title
-
     def get_problem_count(self) -> int:
         return self.geoproblem_set.count() + \
             self.knowledgetextproblem_set.count() + \
@@ -43,6 +39,12 @@ class Location(models.Model):
 
     def location_completed(self, user: User) -> bool:
         return (self.get_problem_count() == self.get_completed_problem_count(user))
+
+    def location_found(self, user: User) -> bool:
+        if self.geoproblem_set.exists():
+            if not GeoResponse.objects.filter(problem__location = self, user = user, correct = True).exists():
+                return self.title
+        return self.hidden_title
 
 
 class Problem(models.Model):
@@ -141,12 +143,11 @@ class ExtendedUser(models.Model):
 ## TODO
 #
 # - Lokasjoner med ålreit formatering
+# X Lagnavn i head title
+# X Templatetag for å vise get_title dersom det er løst en geo-oppgave
 # X Sette lagnavn for bruker
 #   X JS-kdoe for å sette lagnavnet
-# - Fjerne CORS?
-# - Generalisere JS-koden
-# - Lagnavn i head title
-# - Templatetag for å vise get_title dersom det er løst en geo-oppgave
+# X Fjerne CORS?
 # X Innlogging og krav om ditto
 # X Brukertilpassing
 # X Sjekk om det finnes riktige svar

@@ -2,7 +2,7 @@
 
 {% load rebus_extras %}
 
-{% block title %}Oppgaver{% endblock %}
+{% block title %}Oppgaver &ndash; {{ user.extendeduser.team_name }}{% endblock %}
 
 {% block content %}
 <h2>Oppgaver</h2>
@@ -11,7 +11,7 @@
     {% location_completed location user as location_completed_flag %}
 <details class="location{% if location_completed_flag %} correct{% endif %}" {% if location_completed_flag is False %}open{% endif %}>
     <summary>
-        <a href="{% url 'rebus:location-detail' location.pk %}">{{ location.get_title }}</a>
+        <a href="{% url 'rebus:location-detail' location.pk %}">{% location_title location user %}</a>
     </summary>
     <p class="problemcount">Dere har gjort {% problems_completed location user %} av {{ location.get_problem_count }} oppgaver</p>
 </details>

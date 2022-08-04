@@ -43,14 +43,12 @@ INSTALLED_APPS = [
     'rebus',
     'sslserver',
     'rest_framework',
-    'corsheaders',
     'nested_admin'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -140,12 +138,6 @@ CKEDITOR_UPLOAD_PATH = "upload"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CORS_ALLOWED_ORIGINS = [
-    'https://127.0.0.1:8080',
-]
-        
-CORS_ORIGIN_ALLOW_ALL = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/'

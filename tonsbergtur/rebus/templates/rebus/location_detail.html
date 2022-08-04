@@ -2,12 +2,12 @@
 
 {% load rebus_extras %}
 
-{% block title %}{{ location.get_title }}{% endblock %}
+{% block title %}{% location_title location user %} &ndash; {{ user.extendeduser.team_name }}{% endblock %}
 
 {% block content %}
 <p><a href="{% url 'rebus:location-list' %}">Alle oppgaver</a></p>
 
-<h2>{{ location.get_title }}</h2>
+<h2>{% location_title location user %}</h2>
 {{ location.description|safe }}
 
     {% for problem in location.geoproblem_set.all %}
