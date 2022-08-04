@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 
-from .models import Response, GeoResponse, KnowledgeTextResponse, KnowledgeNumberResponse, OpenResponse
+from .models import ExtendedUser, Response, GeoResponse, KnowledgeTextResponse, KnowledgeNumberResponse, OpenResponse
 from .models import Problem,  GeoProblem,  KnowledgeTextProblem,  KnowledgeNumberProblem,  OpenProblem
 
 class ResponseSerializer(serializers.ModelSerializer):
@@ -55,3 +55,16 @@ class OpenResponseSerializer(ResponseSerializer):
         validated_data['correct'] = validated_data['problem'].verify_answer()
 
         return super(OpenResponseSerializer, self).create(validated_data)
+
+class TeamNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExtendedUser
+        fields = ('user', 'team_name')
+
+    def create(self, validated_data):
+        validated_data['user'] = self.context.get('user')
+        return super(TeamNameSerializer, self).create(validated_data)
+
+    def update(self, instance, validated_data):
+        instance.team_name = validated_data['team_name']
+        return super().update(instance, validated_data)

@@ -1,7 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from . import views
-from .views import LocationListView, LocationDetailView, GeoProblemView, KnowledgeTextProblemView, KnowledgeNumberProblemView, OpenProblemView
+from .views import LocationListView, LocationDetailView, GeoProblemView, KnowledgeTextProblemView, KnowledgeNumberProblemView, OpenProblemView, TeamNameView
 
 app_name = 'rebus'
 urlpatterns = [
@@ -11,6 +10,7 @@ urlpatterns = [
     path('check-text/', KnowledgeTextProblemView.as_view(), name='check-text'),
     path('check-number/', KnowledgeNumberProblemView.as_view(), name='check-number'),
     path('check-open/', OpenProblemView.as_view(), name='check-open'),
+    path('set-team-name/', TeamNameView.as_view(), name='set-team-name'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -13,7 +13,10 @@
 </ul>
 <p>Med mindre annet er sagt, er alle hjelpemidler tillatt</p>
 {% if user.is_authenticated %}
-<p id="godturknapp"><a href="{% url 'rebus:location-list' %}">God tur!</a></p>
+<p>Hva er lagnavnet deres?</p>
+    <input id="teamname" name="teamname" value="{{ user.extendeduser.team_name }}" />
+    <input type="button" value="Sett lagnavn" onclick="teamNameSubmit()" />
+<a id="godturknapp" href="{% url 'rebus:location-list' %}">God tur, {{ user.extendeduser.team_name }}!</a>
 {% else %}
 <p>Logg inn for å fortsette</p>
 <form method="post" action="{% url 'login' %}">
@@ -31,5 +34,3 @@
 {% endif %}
 
 {% endblock %}
-
-

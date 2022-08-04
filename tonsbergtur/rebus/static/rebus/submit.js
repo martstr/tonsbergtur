@@ -134,8 +134,6 @@ function numberProblemSubmit(problem_id) {
 }
 
 function openProblemSubmit(problem_id) {
-    console.log("Starter");
-
     const responseLbl = document.querySelector('#lblopen'.concat(problem_id));
     const csrftoken = getCookie('csrftoken');
 
@@ -166,5 +164,32 @@ function openProblemSubmit(problem_id) {
     .catch((error) => {
         console.error('Error:', error);
         responseLbl.textContent = error
+    });
+}
+
+function teamNameSubmit(problem_id) {
+    const csrftoken = getCookie('csrftoken');
+    const responseLbl = document.querySelector('#godturknapp');
+
+    const data = {
+        team_name: document.getElementById('teamname').value,
+    };
+
+    fetch(window.location.origin.concat('/set-team-name/'), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        mode: 'same-origin',
+        body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log('Success:', data);
+        responseLbl.textContent = "God tur, " + document.getElementById('teamname').value + "!"; // 'God tur, '.).concat('!');
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
 }

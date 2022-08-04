@@ -1,12 +1,8 @@
 ﻿from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from geopy.distance import distance as geo_distance
 from Levenshtein import distance as levenshtein_distance
-
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 
 class Location(models.Model):
     title = models.CharField(
@@ -138,16 +134,25 @@ class OpenProblem(Problem):
 class OpenResponse(Response):
     problem = models.ForeignKey(OpenProblem, on_delete = models.CASCADE)
 
+class ExtendedUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
+    team_name = models.CharField(max_length = 100)
+
 ## TODO
 #
-# - Innlogging og krav om ditto
+# - Lokasjoner med ålreit formatering
+# X Sette lagnavn for bruker
+#   X JS-kdoe for å sette lagnavnet
+# - Fjerne CORS?
+# - Generalisere JS-koden
+# - Lagnavn i head title
+# - Templatetag for å vise get_title dersom det er løst en geo-oppgave
+# X Innlogging og krav om ditto
 # X Brukertilpassing
 # X Sjekk om det finnes riktige svar
 # X Vise skjema for hver iterasjon
 #   X Javascript for nevnte
-# - Lokasjoner med ålreit formatering
 # X Oppgaver på lokasjon
 # X GPS-innsending
 #   X Avstand mellom to punkter
-# - Sette lagnavn for bruker
-# - Riktig bruk av index
+# X Riktig bruk av index

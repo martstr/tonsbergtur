@@ -1,5 +1,8 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 from nested_admin import NestedModelAdmin, NestedTabularInline
+
 from .models import *
 
 class GeoResponseInline(NestedTabularInline):
@@ -55,3 +58,13 @@ admin.site.register(Location, LocationAdmin)
 #admin.site.register(GeoProblem)
 #admin.site.register(KnowledgeTextProblem)
 #admin.site.register(KnowledgeNumberProblem)
+
+class TeamNameInline(admin.StackedInline):
+    model = ExtendedUser
+    can_delete = False
+
+class UserAdmin(BaseUserAdmin):
+    inlines = (TeamNameInline, )
+  
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
