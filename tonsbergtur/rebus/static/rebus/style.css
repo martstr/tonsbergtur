@@ -1,4 +1,4 @@
-html, body {
+﻿html, body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -81,7 +81,7 @@ html, body {
     font-size: xx-large;
 }
 
-#mainmatter h3 {
+/*#mainmatter h3 {
     display: block;
     background-color: blue;
     color: white;
@@ -94,7 +94,7 @@ html, body {
     height: 100%;
     color: white;
     text-decoration: none;
-}
+}*/
 
 footer {
     background-color: black;
@@ -107,4 +107,106 @@ footer {
 
 footer .easteregg {
     color: black;
+}
+
+div.content {
+    padding: .5em;
+}
+
+a#godturknapp{
+    display: block;
+    border: 1px solid blue;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 150%;
+    margin: auto;
+    margin-top: 1em;
+    padding: 1em;
+    text-align: center;
+    width: 75%;
+    text-decoration: none;
+}
+
+a#godturknapp::after, a.gavidere::after {
+    content: " 🡪"
+}
+
+a.gavidere {
+    display: block;
+    border: 1px solid blue;
+    background-color: cornflowerblue;
+    color: white;
+    margin: auto;
+    margin-top: .5em;
+    padding: .5em 2em;
+    text-align: center;
+    width: 75%;
+    text-decoration: none;
+}
+
+div#login, div#goahead {
+    display: block;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    padding: .5em;
+    background-color: gainsboro;
+    text-align: center;
+}
+
+div#login label {
+    display: none;
+}
+
+input[type=text], input[type=password], input[type=number] {
+    padding: .5em;
+    border: none;
+}
+
+input[type=submit], input[type=button], button {
+    padding: .5em 2em;
+    border: 1px solid blue;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+details {
+    margin-bottom: .5em;
+    background-color: gainsboro;
+}
+
+details summary {
+    cursor: pointer;
+    background-color: cornflowerblue;
+    color: white;
+    padding-top: .2em;
+    padding-bottom: .2em;
+}
+
+details.correct summary {
+    background-color: limegreen;
+}
+
+details.correct summary::after {
+    content: " ✓";
+    font-weight: bold;
+}
+
+details summary h3 {
+    font-weight: normal;
+}
+
+details summary > * {
+    display: inline;
+}
+
+details > div {
+    padding: .3em;
+}
+
+details > div > div.form {
+    text-align: center;
+}
+
+p.given_answer {
+    font-weight: bold;
 }

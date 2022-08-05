@@ -95,6 +95,10 @@ class KnowledgeTextProblem(Problem):
     correct_answer = models.CharField(max_length = 100)
     threshold = models.IntegerField(default=0, help_text='Accepted Levenshtein distance between given and correct answer. 0 for only exact answers')
     
+    def get_accepted_answer(self, user):
+        if self.user_has_correct_answer(user):
+            return KnowledgeTextResponse.objects.filter(problem = self, user = user, correct = True).last().answer
+
     def user_has_correct_answer(self, user: User) -> bool:
         return KnowledgeTextResponse.objects.filter(problem = self, user = user, correct = True).exists()
 
@@ -109,7 +113,11 @@ class KnowledgeTextResponse(Response):
 class KnowledgeNumberProblem(Problem):
     correct_answer = models.FloatField()
     threshold = models.IntegerField(default=0, help_text='Accepted distance from correct answer, in percent. If correct_answer is 0, the distance is treated as if it was 1')
-    
+       
+    def get_accepted_answer(self, user):
+        if self.user_has_correct_answer(user):
+            return KnowledgeNumberResponse.objects.filter(problem = self, user = user, correct = True).last().answer
+
     def user_has_correct_answer(self, user: User) -> bool:
         return KnowledgeNumberResponse.objects.filter(problem = self, user = user, correct = True).exists()
 
@@ -142,6 +150,7 @@ class ExtendedUser(models.Model):
 
 ## TODO
 #
+# - Skjul form for korrekt besvarte spørsmål
 # - Lokasjoner med ålreit formatering
 # X Lagnavn i head title
 # X Templatetag for å vise get_title dersom det er løst en geo-oppgave

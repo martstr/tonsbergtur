@@ -3,34 +3,41 @@
 {% block title %}Tur i Tønsberg{% endblock %}
 
 {% block content %}
-<h2>Velkommen på tur!</h2>
-<p>Her er det dere kan forvente de neste timene</p>
-<ul>
-    <li>En hyggelig spasertur med gode kollegaer</li>
-    <li>Litt hjernetrim</li>
-    <li>En smule OSINT og annen informasjonsinnhenting?</li>
-    <li>Om dere er flinke, en gratis kopp kaffe</li>
-</ul>
-<p>Med mindre annet er sagt, er alle hjelpemidler tillatt</p>
+<div class="content">
+    <h2>Velkommen på tur!</h2>
+    <p>Her er det dere kan forvente de neste timene</p>
+    <ul>
+        <li>En hyggelig spasertur med gode kollegaer</li>
+        <li>Litt hjernetrim</li>
+        <li>En smule OSINT og annen informasjonsinnhenting?</li>
+        <li>Om dere er flinke, en gratis kopp kaffe</li>
+    </ul>
+    <p>Med mindre annet er sagt, er alle hjelpemidler tillatt</p>
+</div>
+
 {% if user.is_authenticated %}
-<p>Hva er lagnavnet deres?</p>
-    <input id="teamname" name="teamname" value="{{ user.extendeduser.team_name }}" />
+<div id="goahead">
+    <p>Hva er lagnavnet deres?</p>
+    <input type="text" id="teamname" name="teamname" value="{{ user.extendeduser.team_name }}" />
     <input type="button" value="Sett lagnavn" onclick="teamNameSubmit()" />
+</div>
 <a id="godturknapp" href="{% url 'rebus:location-list' %}">God tur, {{ user.extendeduser.team_name }}!</a>
 {% else %}
-<p>Logg inn for å fortsette</p>
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {% if form.errors %}
-    <p class="loginerror">Feil brukernavn og passord. Prøv igjen.</p>
-    {% endif %}
+<div id="login">
+    <p>Logg inn for å fortsette</p>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {% if form.errors %}
+        <p class="loginerror">Feil brukernavn og passord. Prøv igjen.</p>
+        {% endif %}
 
-    <p><label for="id_username">Brukernavn:</label> <input id="id_username" type="text" name="username" maxlength="30" /></p>
-    <p><label for="id_password">Passord:</label> <input type="password" name="password" id="id_password" /></p>
+        <p><label for="id_username">Brukernavn:</label> <input id="id_username" type="text" name="username" maxlength="30" placeholder="Brukernavn" /></p>
+        <p><label for="id_password">Passord:</label> <input type="password" name="password" id="id_password" placeholder="Passord" /></p>
 
-    <input type="submit" value="Logg in" />
-    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-</form>
+        <input type="submit" value="Logg in" />
+        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+    </form>
+</div>
 {% endif %}
 
 {% endblock %}

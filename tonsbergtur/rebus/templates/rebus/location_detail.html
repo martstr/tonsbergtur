@@ -13,39 +13,67 @@
     {% for problem in location.geoproblem_set.all %}
         {% responded_correctly problem user as responded_correctly_flag %}
 <details {% if responded_correctly_flag %}class="correct" {% endif %}>
-    <summary>{{ problem.title }}</summary>
-    {{ problem.description|safe }}
-    <button class="submit find-me" onclick="geoProblemSubmit({{problem.pk}})">Vi er her</button>
-    <p id="lblgeo{{problem.pk}}"></p>
+    <summary><h3>{{ problem.title }}</h3></summary>
+    <div>
+        {{ problem.description|safe }}
+        {% if not responded_correctly_flag %}
+        <div class="form">
+            <button class="submit find-me" onclick="geoProblemSubmit({{problem.pk}})">Vi er her</button>
+        </div>
+        {% endif %}
+        <p id="lblgeo{{problem.pk}}"></p>
+    </div>
 </details>
     {% endfor %}
     {% for problem in location.knowledgetextproblem_set.all %}
         {% responded_correctly problem user as responded_correctly_flag %}
 <details {% if responded_correctly_flag %}class="correct" {% endif %}>
-    <summary>{{ problem.title }}</summary>
-    {{ problem.description|safe }}
-    <input type="text" id="text{{problem.pk}}" name="text{{problem.pk}}">
-    <button class="submit textproblem" onclick="textProblemSubmit({{problem.pk}})">Send inn svar</button>
-    <p id="lbltext{{problem.pk}}"></p>
+    <summary><h3>{{ problem.title }}</h3></summary>
+    <div>
+        {{ problem.description|safe }}
+        {% if not responded_correctly_flag %}
+        <div class="form">
+            <input type="text" id="text{{problem.pk}}" name="text{{problem.pk}}">
+            <button class="submit textproblem" onclick="textProblemSubmit({{problem.pk}})">Send inn svar</button>
+        </div>
+        {% else %}
+        <p class="given_answer">Dere svarte {% get_accepted_answer problem user %}</p>
+        {% endif %}
+        <p id="lbltext{{problem.pk}}"></p>
+    </div>
 </details>
     {% endfor %}
     {% for problem in location.knowledgenumberproblem_set.all %}
         {% responded_correctly problem user as responded_correctly_flag %}
 <details {% if responded_correctly_flag %}class="correct" {% endif %}>
-    <summary>{{ problem.title }}</summary>
-    {{ problem.description|safe }}
-    <input type="number" id="number{{problem.pk}}" name="number{{problem.pk}}">
-    <button class="submit numberproblem" onclick="numberProblemSubmit({{problem.pk}})">Send inn svar</button>
-    <p id="lblnumber{{problem.pk}}"></p>
+    <summary><h3>{{ problem.title }}</h3></summary>
+    <div>
+        {{ problem.description|safe }}
+        {% if not responded_correctly_flag %}
+        <div class="form">
+            <input type="number" id="number{{problem.pk}}" name="number{{problem.pk}}">
+            <button class="submit numberproblem" onclick="numberProblemSubmit({{problem.pk}})">Send inn svar</button>
+        </div>
+        {% else %}
+        <p class="given_answer">Dere svarte: {% get_accepted_answer problem user %}</p>
+        {% endif %}
+        <p id="lblnumber{{problem.pk}}"></p>
+    </div>
 </details>
     {% endfor %}
     {% for problem in location.openproblem_set.all %}
         {% responded_correctly problem user as responded_correctly_flag %}
 <details {% if responded_correctly_flag %}class="correct" {% endif %}>
-    <summary>{{ problem.title }}</summary>
-    {{ problem.description|safe }}
-    <button class="submit openproblem" onclick="openProblemSubmit({{problem.pk}})">Registrer utført</button>
-    <p id="lblopen{{problem.pk}}"></p>
+    <summary><h3>{{ problem.title }}</h3></summary>
+    <div>
+        {{ problem.description|safe }}
+        {% if not responded_correctly_flag %}
+        <div class="form">
+            <button class="submit openproblem" onclick="openProblemSubmit({{problem.pk}})">Registrer utført</button>
+        </div>
+        {% endif %}
+        <p id="lblopen{{problem.pk}}"></p>
+    </div>
 </details>
     {% endfor %}
 {% endblock %}

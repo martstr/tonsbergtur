@@ -11,12 +11,15 @@
     {% location_completed location user as location_completed_flag %}
 <details class="location{% if location_completed_flag %} correct{% endif %}" {% if location_completed_flag is False %}open{% endif %}>
     <summary>
-        <a href="{% url 'rebus:location-detail' location.pk %}">{% location_title location user %}</a>
+        <h3>{% location_title location user %}</h3>
     </summary>
-    <p class="problemcount">Dere har gjort {% problems_completed location user %} av {{ location.get_problem_count }} oppgaver</p>
+    <div>
+        <p class="problemcount">Dere har gjort {% problems_completed location user %} av {{ location.get_problem_count }} oppgaver.</p>
+        <a class="gavidere" href="{% url 'rebus:location-detail' location.pk %}">Se oppgavene</a>
+    </div>   
 </details>
     {% endfor %}
-{{ location_list|length }} steder å besøke
+<p>{{ location_list|length }} steder å besøke.</p>
 
 {% endif %}
 {% endblock %}
