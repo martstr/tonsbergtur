@@ -14,19 +14,14 @@
 <body>
     <div id="holder">
         <div id="topmatter">
+            {% block back %}{% endblock %}
             <h1><a href="{% url 'index' %}">Tur i Tønsberg</a></h1>
-            <nav id="menu">
-                <!-- Foreløpig tom -->
-            </nav>
         </div>
 
         <div id="mainmatter">
             {% block content %}{% endblock %}
         </div>
 
-        <footer>
-            Oppgaver av Christina og Martin, programmering av Martin. God tur! <span class="easteregg">Heia Bodø/Glimt!</span>
-        </footer>
     </div>
 </body>
 </html>
