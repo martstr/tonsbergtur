@@ -14,7 +14,7 @@
 
     {% for problem in location.geoproblem_set.all %}
     {% responded_correctly problem user as responded_correctly_flag %}
-    <details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <details id="geodetails{{problem.pk}}" {% if responded_correctly_flag %}class="correct" {% endif %}>
         <summary><h3>{{ problem.title }}</h3></summary>
         <div>
             {{ problem.description|safe }}
@@ -29,7 +29,7 @@
     {% endfor %}
     {% for problem in location.knowledgetextproblem_set.all %}
     {% responded_correctly problem user as responded_correctly_flag %}
-    <details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <details id="textdetails{{problem.pk}}" {% if responded_correctly_flag %}class="correct" {% endif %}>
         <summary><h3>{{ problem.title }}</h3></summary>
         <div>
             {{ problem.description|safe }}
@@ -47,7 +47,7 @@
     {% endfor %}
     {% for problem in location.knowledgenumberproblem_set.all %}
     {% responded_correctly problem user as responded_correctly_flag %}
-    <details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <details id="numberdetails{{problem.pk}}" {% if responded_correctly_flag %}class="correct" {% endif %}>
         <summary><h3>{{ problem.title }}</h3></summary>
         <div>
             {{ problem.description|safe }}
@@ -65,7 +65,7 @@
     {% endfor %}
     {% for problem in location.openproblem_set.all %}
     {% responded_correctly problem user as responded_correctly_flag %}
-    <details {% if responded_correctly_flag %}class="correct" {% endif %}>
+    <details id="opendetails{{problem.pk}}" {% if responded_correctly_flag %}class="correct" {% endif %}>
         <summary><h3>{{ problem.title }}</h3></summary>
         <div>
             {{ problem.description|safe }}

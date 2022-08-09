@@ -40,8 +40,9 @@ function geoProblemSubmit(problem_id) {
                 console.log('Success:', data);
                 if (data.status) {
                     responseLbl.textContent = 'Riktig!';
+                    document.querySelector('#geodetails' + problem_id).classList.add('correct');
                 } else {
-                    responseLbl.textContent = 'Nehei, det er dere ikke.'
+                    responseLbl.textContent = 'Nehei, det er dere ikke.';
                 }
 
             })
@@ -88,6 +89,7 @@ function textProblemSubmit(problem_id) {
             console.log('Success:', data);
             if (data.status) {
                 responseLbl.textContent = 'Riktig!';
+                document.querySelector('#textdetails' + problem_id).classList.add('correct');
             } else {
                 responseLbl.textContent = 'Nope.'
             }
@@ -122,6 +124,7 @@ function numberProblemSubmit(problem_id) {
             console.log('Success:', data);
             if (data.status) {
                 responseLbl.textContent = 'Riktig!';
+                document.querySelector('#numberdetails' + problem_id).classList.add('correct');
             } else {
                 responseLbl.textContent = 'Nope.'
             }
@@ -138,7 +141,6 @@ function openProblemSubmit(problem_id) {
     const csrftoken = getCookie('csrftoken');
 
     const data = {
-        answer: document.getElementById('open'.concat(problem_id)).value,
         problem_id: problem_id,
     };
 
@@ -156,6 +158,7 @@ function openProblemSubmit(problem_id) {
         console.log('Success:', data);
         if (data.status) {
             responseLbl.textContent = 'OK!';
+            document.querySelector('#opendetails' + problem_id).classList.add('correct');
         } else {
             responseLbl.textContent = 'Nope.'
         }

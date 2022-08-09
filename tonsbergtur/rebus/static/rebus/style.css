@@ -117,7 +117,7 @@ a#godturknapp{
 }
 
 a#godturknapp::after, a.gavidere::after {
-    content: " \1F86A";
+    content: "\2192";
 }
 
 a.gavidere {
@@ -171,7 +171,7 @@ details {
 details summary {
     cursor: pointer;
     /*background-color: cornflowerblue*/
-    background: ##483D8B;
+    background: #483D8B;
     color: white;
     padding-top: .2em;
     padding-left: .5em;
@@ -196,7 +196,7 @@ details.correct a.gavidere {
 }
 
 details.correct summary::after {
-    content: " \2713";
+    content: "\2713";
     font-weight: bold;
 }
 
