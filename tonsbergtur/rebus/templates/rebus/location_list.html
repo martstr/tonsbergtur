@@ -4,6 +4,8 @@
 
 {% block title %}Oppgaver &ndash; {{ user.extendeduser.team_name }}{% endblock %}
 
+{% block back %}<a href="{% url 'index' %}" class="back">&lsaquo;</a>{% endblock %}
+
 {% block content %}
 <div class="content">
     <h2>Oppgaver</h2>

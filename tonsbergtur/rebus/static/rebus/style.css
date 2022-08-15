@@ -102,10 +102,10 @@ footer {
     padding: .5em;
 }
 
-a#godturknapp{
+a#godturknapp {
     display: block;
-    border: 1px solid blue;
-    background-color: cornflowerblue;
+    border: 1px solid #0073BD;
+    background-color: #0073BD;
     color: white;
     font-size: 150%;
     margin: auto;
@@ -122,8 +122,8 @@ a#godturknapp::after, a.gavidere::after {
 
 a.gavidere {
     display: block;
-    border: 2px solid blue;
-    background-color: cornflowerblue;
+    border: 2px solid #0073BD;
+    background-color: #0073BD;
     color: white;
     margin: auto;
     margin-top: .5em;
@@ -154,8 +154,8 @@ input[type=text], input[type=password], input[type=number] {
 
 input[type=submit], input[type=button], button {
     padding: .5em 2em;
-    border: solid 2px blue;
-    background-color: cornflowerblue;
+    border: solid 2px #0073BD;
+    background-color: #0073BD;
     color: white;
 }
 
