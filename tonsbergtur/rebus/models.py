@@ -147,22 +147,4 @@ class OpenResponse(Response):
 class ExtendedUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) 
     team_name = models.CharField(max_length = 100)
-
-## TODO
-#
-# - Skjul form for korrekt besvarte spørsmål
-# - Lokasjoner med ålreit formatering
-# X Lagnavn i head title
-# X Templatetag for å vise get_title dersom det er løst en geo-oppgave
-# X Sette lagnavn for bruker
-#   X JS-kdoe for å sette lagnavnet
-# X Fjerne CORS?
-# X Innlogging og krav om ditto
-# X Brukertilpassing
-# X Sjekk om det finnes riktige svar
-# X Vise skjema for hver iterasjon
-#   X Javascript for nevnte
-# X Oppgaver på lokasjon
-# X GPS-innsending
-#   X Avstand mellom to punkter
-# X Riktig bruk av index
+    player = models.BooleanField(blank = True, default = True)

@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+
+{% load rebus_extras %}
+
+{% block title %}Resultatliste{% endblock %}
+
+{% block back %}<a href="{% url 'index' %}" class="back">&lsaquo;</a>{% endblock %}
+
+{% block content %}
+<div class="content">
+    <table>
+        <tr><th>Sted</th><th>Oppgave</th>
+        {% for user in users %}
+            <th>{{user.team_name}}</th>
+        {% endfor %}
+        </tr>
+        {% for result in results %}
+            <tr>
+                {% for field in result %}
+                <td>{{field}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>Totalt</td>
+            <td></td>
+
+            {% for sum in total %}
+            <td>{{sum}}</td>
+            {% endfor %}
+        </tr>
+    </table>
+</div>
+{% endblock %}

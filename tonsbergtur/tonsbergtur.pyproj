@@ -71,6 +71,7 @@
     <Content Include="rebus\templates\rebus\location_detail.html" />
     <Content Include="rebus\templates\rebus\location_list.html" />
     <Content Include="rebus\templates\rebus\response.html" />
+    <Content Include="rebus\templates\rebus\results.html" />
     <Content Include="requirements.txt" />
     <Content Include="templates\403.html" />
     <Content Include="templates\404.html" />
